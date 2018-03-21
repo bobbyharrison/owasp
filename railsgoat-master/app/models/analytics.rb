@@ -15,4 +15,19 @@ class Analytics < ApplicationRecord
       "1"
     end
   end
+
+  def analytics
+  if params[:field].nil?
+    fields = "*"
+  else
+   fields = params[:field].map {|k,v| Analytics.parse_field(k) }.join(",")
+  end
+
+  if params[:ip]
+    @analytics = Analytics.hits_by_ip(params[:ip], fields)
+  else
+    @analytics = Analytics.all
+  end
+  render "layouts/admin/_analytics"
+end
 end
