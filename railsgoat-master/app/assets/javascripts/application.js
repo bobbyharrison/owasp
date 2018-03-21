@@ -31,7 +31,7 @@
 //= html5.js
 
 function rubyCodeFormat() {
-	
+
 
 
 $("pre.ruby").snippet("ruby",{style:"rand01",transparent:true,showNum:true});
@@ -64,15 +64,20 @@ var rAmp = /&/g,
      hChars = /[&<>\"\']/;
 
 function hoganEscape(str) {
-    str = coerceToString(str);
-    return hChars.test(str) ?
-      str
-        .replace(rAmp, '&amp;')
-        .replace(rLt, '&lt;')
-        .replace(rGt, '&gt;')
-        .replace(rApos, '&#39;')
-        .replace(rQuot, '&quot;') :
-      str;
+	<!-- support for multiple languages coming soon! -->
+<script>
+  //document.write("<select style="width: 100px;">");
+  //document.write("<OPTION value=1>English</OPTION>");
+  //document.write("<OPTION value=2>Spanish</OPTION>");
+  try {
+    var hashParam = location.hash.split("#")[1];
+    var paramName = hashParam.split('=')[0];
+    var paramValue = decodeURIComponent(hashParam.split('=')[1]);
+    document.write("<OPTION value=3>" +   hoganEscape(paramValue)  + "</OPTION>");
+  } catch(err) {
+ }
+  //document.write("</select>");
+</script>
   }
 
 $(document).ready(function(){
